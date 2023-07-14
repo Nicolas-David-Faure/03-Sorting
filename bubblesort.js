@@ -1,23 +1,21 @@
+function swap(array, indice) {
+  [array[indice], array[indice + 1]] = [array[indice + 1], array[indice]]
+}
+
+function inOrder(array, indice) {
+  return array[indice+1] && array[indice] <= array[indice+1]
+}
 
 function bubbleSort(arr) {
-
-    var len = arr.length;
- 
-    for (var i = 0; i < len; i++) {
-      for (var j = 0; j < len - 1; j++) {
-        if (arr[j] > arr[j + 1]) {
-            counter+=1
-          swap(arr, j, j + 1);
-        }
+  for (var j = arr.length; j > 0; j--) {
+    var swapped = false;
+    for (var i = 0; i < j - 1; i++) {
+      if (!inOrder(arr, i)) {
+        swap(arr, i);
+        swapped = true;
       }
     }
-
-    return arr.flat();
+    if (!swapped) break;
   }
-  
-  function swap(arr, i, j) {
-    // Intercambia los elementos en las posiciones i y j del array
-    var temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  }
+  return arr;
+}
